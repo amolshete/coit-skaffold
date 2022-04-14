@@ -51,7 +51,7 @@ profiles:
       local:
         push: true
     deploy:
-      kubeContext: arn:aws:eks:ap-south-1:210607809234:cluster/aws-mumbai-all
+      kubeContext: gke_trim-tide-339908_us-central1-c_practice-cluster
       kubectl:
         manifests:
         - resource-manifests/coit-backend1-deployment.yaml
@@ -63,46 +63,46 @@ profiles:
 
 # skaffold run -p prod
 
-- name: prod
-    activation:
-      - env: CURRENTENV=prod
-    build:
-      artifacts:
-      - image: amol1996/coit-backend1
-        context: coit-backend1
-        docker:
-          dockerfile: Dockerfile
-      - image: amol1996/coit-backend2
-        context: coit-backend2
-        docker:
-          dockerfile: Dockerfile
-      - image: amol1996/coit-frontend
-        context: coit-frontend
-        docker:
-          dockerfile: Dockerfile
-      local:
-        push: true
-    deploy:
-      kubeContext: gke_trim-tide-339908_us-central1-c_practice-cluster
-      kubectl:
-        manifests:
-        - resource-manifests/coit-backend1-deployment.yaml
-        - resource-manifests/coit-backend2-deployment.yaml
-        - resource-manifests/coit-frontend-deployment.yaml
-        - resource-manifests/service-coit-backend1-lb.yaml
-        - resource-manifests/service-coit-backend2.yaml
-        - resource-manifests/service-coit-frontend-lb.yaml            
+# - name: prod
+#     activation:
+#       - env: CURRENTENV=prod
+#     build:
+#       artifacts:
+#       - image: amol1996/coit-backend1
+#         context: coit-backend1
+#         docker:
+#           dockerfile: Dockerfile
+#       - image: amol1996/coit-backend2
+#         context: coit-backend2
+#         docker:
+#           dockerfile: Dockerfile
+#       - image: amol1996/coit-frontend
+#         context: coit-frontend
+#         docker:
+#           dockerfile: Dockerfile
+#       local:
+#         push: true
+#     deploy:
+#       kubeContext: gke_trim-tide-339908_us-central1-c_practice-cluster
+#       kubectl:
+#         manifests:
+#         - resource-manifests/coit-backend1-deployment.yaml
+#         - resource-manifests/coit-backend2-deployment.yaml
+#         - resource-manifests/coit-frontend-deployment.yaml
+#         - resource-manifests/service-coit-backend1-lb.yaml
+#         - resource-manifests/service-coit-backend2.yaml
+#         - resource-manifests/service-coit-frontend-lb.yaml            
 
-portForward:
-- resourceType: service
-  resourceName: coit-frontend-lb
-  port: 80
-  localPort: 4500 
+# portForward:
+# - resourceType: service
+#   resourceName: coit-frontend-lb
+#   port: 80
+#   localPort: 4500 
 
-- resourceType: service
-  resourceName: coit-backend1-lb
-  port: 80
-  localPort: 4600
+# - resourceType: service
+#   resourceName: coit-backend1-lb
+#   port: 80
+#   localPort: 4600
 
 
 
